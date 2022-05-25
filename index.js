@@ -13,28 +13,29 @@ app.use(express.json());
 
 
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.x4vab.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hz9lk.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
     try {
         await client.connect();
-        const productCollection = client.db('mobileMart').collection('products');
 
-        // app.get('/product', async (req, res) => {
-        //     const query = {};
-        //     const cursor = productCollection.find(query);
-        //     const Product = await cursor.toArray();
-        //     res.send(Product)
-        // });
+        const toolsCollection = client.db('computing_Cafe').collection('tools');
 
-        // app.get('/product/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { _id: ObjectId(id) };
-        //     const product = await productCollection.findOne(query);
-        //     res.send(product)
-        // })
+        app.get('/tool', async (req, res) => {
+            const query = {};
+            const cursor = toolsCollection.find(query);
+            const tools = await cursor.toArray();
+            res.send(tools)
+        });
+
+        app.get('/tool/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const tool = await toolsCollection.findOne(query);
+            res.send(tool)
+        })
 
         //post
         // app.post('/product', async (req, res) => {
