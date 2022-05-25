@@ -22,57 +22,57 @@ async function run() {
         await client.connect();
         const productCollection = client.db('mobileMart').collection('products');
 
-        app.get('/product', async (req, res) => {
-            const query = {};
-            const cursor = productCollection.find(query);
-            const Product = await cursor.toArray();
-            res.send(Product)
-        });
+        // app.get('/product', async (req, res) => {
+        //     const query = {};
+        //     const cursor = productCollection.find(query);
+        //     const Product = await cursor.toArray();
+        //     res.send(Product)
+        // });
 
-        app.get('/product/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const product = await productCollection.findOne(query);
-            res.send(product)
-        })
+        // app.get('/product/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     const query = { _id: ObjectId(id) };
+        //     const product = await productCollection.findOne(query);
+        //     res.send(product)
+        // })
 
         //post
-        app.post('/product', async (req, res) => {
-            const newProduct = req.body;
-            const result = await productCollection.insertOne(newProduct);
-            res.send(result)
-        });
+        // app.post('/product', async (req, res) => {
+        //     const newProduct = req.body;
+        //     const result = await productCollection.insertOne(newProduct);
+        //     res.send(result)
+        // });
 
         //update
-        app.put('product/:id', async (req, res) => {
-            const id = req.params.id;
-            const quantity = req.body;
-            console.log(quantity);
-            const query = { _id: ObjectId(id) };
-            const options = { upsert: true };
-            const updateDoc = {
-                $set: {
-                    _id: id,
-                    name: item.name,
-                    price: item.price,
-                    description: item.description,
-                    quantity: quantity.quantity,
-                    suppierName: item.suppierName,
-                    img: item.img
-                }
-            }
-            const result = await itemCollection.updateOne(query, updateDoc, options);
-            res.send(result)
-        })
+        // app.put('product/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     const quantity = req.body;
+        //     console.log(quantity);
+        //     const query = { _id: ObjectId(id) };
+        //     const options = { upsert: true };
+        //     const updateDoc = {
+        //         $set: {
+        //             _id: id,
+        //             name: item.name,
+        //             price: item.price,
+        //             description: item.description,
+        //             quantity: quantity.quantity,
+        //             suppierName: item.suppierName,
+        //             img: item.img
+        //         }
+        //     }
+        //     const result = await itemCollection.updateOne(query, updateDoc, options);
+        //     res.send(result)
+        // })
 
         //delete
-        app.delete('/product/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const result = await productCollection.deleteOne(query);
-            res.send(result);
+        // app.delete('/product/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     const query = { _id: ObjectId(id) };
+        //     const result = await productCollection.deleteOne(query);
+        //     res.send(result);
 
-        })
+        // })
 
     }
     finally {
