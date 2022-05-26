@@ -45,12 +45,20 @@ async function run() {
             res.send(tool)
         })
 
-        //post
+
+
+
         app.post('/order', async (req, res) => {
             const order = req.body;
+            const query = { toolName: order.toolName, userEmail: order.userEmail }
+            const exists = await ordersCollection.findOne(query);
+            if (exists) {
+                return res.send({ success: false, booking: exists })
+            }
             const result = await ordersCollection.insertOne(order);
-            res.send(result)
-        });
+
+            return res.send({ success: true, result });
+        })
 
         //update
         // app.put('product/:id', async (req, res) => {
