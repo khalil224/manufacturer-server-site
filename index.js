@@ -22,6 +22,7 @@ async function run() {
         await client.connect();
 
         const toolsCollection = client.db('computing_Cafe').collection('tools');
+        const ordersCollection = client.db('computing_Cafe').collection('orders');
 
         app.get('/tool', async (req, res) => {
             const query = {};
@@ -38,11 +39,11 @@ async function run() {
         })
 
         //post
-        // app.post('/product', async (req, res) => {
-        //     const newProduct = req.body;
-        //     const result = await productCollection.insertOne(newProduct);
-        //     res.send(result)
-        // });
+        app.post('/order', async (req, res) => {
+            const order = req.body;
+            const result = await ordersCollection.insertOne(order);
+            res.send(result)
+        });
 
         //update
         // app.put('product/:id', async (req, res) => {
