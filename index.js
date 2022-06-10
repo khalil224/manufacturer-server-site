@@ -40,6 +40,7 @@ async function run() {
         const toolsCollection = client.db('computing_Cafe').collection('tools');
         const ordersCollection = client.db('computing_Cafe').collection('orders');
         const userCollection = client.db('computing_Cafe').collection('users');
+        //const reviewCollection = client.db('computing_Cafe').collection('reviews');
 
         app.get('/tool', async (req, res) => {
             const query = {};
@@ -54,6 +55,13 @@ async function run() {
             const orders = await cursor.toArray();
             res.send(orders)
         });
+
+        // app.get('/review', async (req, res) => {
+        //     const query = {};
+        //     const cursor = reviewCollection.find(query);
+        //     const reviews = await cursor.toArray();
+        //     res.send(reviews)
+        // });
 
         app.get('/user', async (req, res) => {
             const users = await userCollection.find().toArray();
